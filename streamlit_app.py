@@ -4,6 +4,8 @@ from load_css import local_css
 
 local_css("style.css")
 
+sentence = st.text_input('Input your sentence here:')
+
 
 keys = {
         'Gastroenterology': 0,
@@ -11,7 +13,6 @@ keys = {
         }
 
 option = st.radio("Press the button", [0, 1, 2, 3, 4])
-option = 
 
 
 class Highlighter():
@@ -25,7 +26,7 @@ class Highlighter():
         return text
 
 
-label = 1
+label = option
 with open("config/{}.yaml".format(label), 'r') as stream:
     try:
         config = stream.read().splitlines()
@@ -34,7 +35,8 @@ with open("config/{}.yaml".format(label), 'r') as stream:
 
 
 print(type(config))
-t = """Hello there my name is per second spike and my other name is sharp wave activity"""
+#t = """Hello there my name is per second spike and my other name is sharp wave activity"""
+
 highlighter = Highlighter()
-t = highlighter.highlight_match(t, config)
+t = highlighter.highlight_match(sentence, config)
 st.markdown(t, unsafe_allow_html=True)
